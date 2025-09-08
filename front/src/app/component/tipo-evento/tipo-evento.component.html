@@ -1,0 +1,24 @@
+<table border="1" style="width: 100%; border-collapse: collapse;">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Duración Típica</th>
+      <th>Duración Mínima</th>
+      <th>Duración Máxima</th>
+      <th>Aforo Habitual</th>
+      <th>Número de Eventos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tipo of tipoEvento">
+      <td>{{ tipo.id }}</td>
+      <td>{{ tipo.nombre }}</td>
+      <td>{{ tipo.duracionTipica }} min</td>
+      <td>{{ tipo.duracionMinima }} min</td>
+      <td>{{ tipo.duracionMaxima }} min</td>
+      <td>{{ tipo.aforoHabitual }}</td>
+      <td>{{ tipo.numeroEventos ?? 'N/A' }}</td>
+    </tr>
+  </tbody>
+</table>

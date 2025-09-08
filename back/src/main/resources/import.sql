@@ -1,0 +1,3 @@
+INSERT INTO tipo_evento (nombre, duracion_tipica, duracion_minima, duracion_maxima, aforo_habitual) VALUES ('Concierto', 120, 90, 180, 500);
+INSERT INTO tipo_evento (nombre, duracion_tipica, duracion_minima, duracion_maxima, aforo_habitual) VALUES ('Conferencia', 60, 45, 90, 200);
+INSERT INTO tipo_evento (nombre, duracion_tipica, duracion_minima, duracion_maxima, aforo_habitual) VALUES ('Taller', 180, 120, 240, 30);
