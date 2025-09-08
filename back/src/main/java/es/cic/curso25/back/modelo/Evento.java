@@ -25,6 +25,8 @@ private int aforoEspecifico;
 
 private String descripcion;
 
+private String lugar;
+
 @ManyToOne
 @JoinColumn(name = "tipo_evento_id")
 @JsonIgnoreProperties("eventos")
@@ -86,6 +88,14 @@ public void setTipoEvento(TipoEvento tipoEvento) {
     this.tipoEvento = tipoEvento;
 }
 
+public String getLugar() {
+    return lugar;
+}
+
+public void setLugar(String lugar) {
+    this.lugar = lugar;
+}
+
 @Override
 public int hashCode() {
     final int prime = 31;
@@ -115,9 +125,11 @@ public boolean equals(Object obj) {
 @Override
 public String toString() {
     return "Evento [id=" + id + ", nombre=" + nombre + ", fechaHora=" + fechaHora + ", duracionEspecifica="
-            + duracionEspecifica + ", aforoEspecifico=" + aforoEspecifico + ", descripcion=" + descripcion
-            + ", tipoEvento=" + tipoEvento + "]";
+            + duracionEspecifica + ", aforoEspecifico=" + aforoEspecifico + ", descripcion=" + descripcion + ", lugar="
+            + lugar + ", tipoEvento=" + tipoEvento + "]";
 }
+
+
 
 
 }

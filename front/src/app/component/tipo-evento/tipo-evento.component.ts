@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TipoEvento } from '../../interface/tipo-evento';
-import { TIPO_EVENTO_MOCK } from '../../mockPrueba/TipoEventoMock';
 import { NgFor } from '@angular/common';
+import { TipoEventoService } from '../../services/tipo-evento.service';
 
 @Component({
   selector: 'app-tipo-evento',
@@ -11,5 +11,15 @@ import { NgFor } from '@angular/common';
   styleUrl: './tipo-evento.component.css'
 })
 export class TipoEventoComponent {
-TipoEvento: TipoEvento[]= TIPO_EVENTO_MOCK
+tipoEvento: TipoEvento[]= [];
+  
+
+  constructor(private tipoEventoService: TipoEventoService) {
+  }
+
+  ngOnInit(): void {
+    this.tipoEventoService.getTipoEventos().subscribe((data: TipoEvento[]) => {
+      this.tipoEvento = data;
+    });
+  }
 }
