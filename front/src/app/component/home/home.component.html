@@ -1,0 +1,29 @@
+<div>
+  <h2>Eventos para Hoy</h2>
+  <div *ngIf="eventosDeHoy.length === 0; else tablaEventos">
+    <p>No hay eventos programados para hoy.</p>
+  </div>
+
+  <ng-template #tablaEventos>
+    <table border="1" style="width: 100%; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Hora</th>
+          <th>Lugar</th>
+          <th>Tipo de Evento</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let evento of eventosDeHoy">
+          <td>{{ evento.nombre }}</td>
+          <td>{{ evento.fechaHora | date: 'HH:mm' }}</td>
+          <td>{{ evento.lugar }}</td>
+          <td>{{ evento.tipoEvento.nombre }}</td>
+          <td>{{ evento.descripcion }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-template>
+</div>
