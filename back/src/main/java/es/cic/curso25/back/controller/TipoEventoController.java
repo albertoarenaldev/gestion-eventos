@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+
 import es.cic.curso25.back.modelo.TipoEvento;
 import es.cic.curso25.back.services.TipoEventoService;
 
@@ -27,5 +29,7 @@ public class TipoEventoController {
         LOGGER.info("Obteniendo todos los tipos de evento");
         return tipoEventoService.findAll();
     }
+
+    
 
 }
