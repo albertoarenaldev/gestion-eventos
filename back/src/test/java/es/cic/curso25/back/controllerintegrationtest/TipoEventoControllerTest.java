@@ -76,4 +76,19 @@ public class TipoEventoControllerTest {
                     assertEquals(3, tipoEventos.size());
                 });
 }
+
+@Test
+    void testCreate() throws Exception {
+        TipoEvento nuevoTipoEvento = new TipoEvento();
+        nuevoTipoEvento.setNombre("Webinar");
+
+        mockMvc.perform(post("/api/tipo_evento")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(nuevoTipoEvento)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.nombre").value("Webinar"));
+    }
+
+
 }
