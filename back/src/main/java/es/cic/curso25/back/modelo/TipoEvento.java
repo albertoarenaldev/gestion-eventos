@@ -2,6 +2,7 @@ package es.cic.curso25.back.modelo;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,6 +16,7 @@ public class TipoEvento {
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long id;
 
+@Column(nullable = false, unique = true)
 private String nombre;
 
 private int duracionTipica;
