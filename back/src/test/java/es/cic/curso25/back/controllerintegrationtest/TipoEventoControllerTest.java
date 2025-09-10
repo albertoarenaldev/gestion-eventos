@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import es.cic.curso25.back.controller.TipoEventoController;
 import es.cic.curso25.back.modelo.TipoEvento;
+import es.cic.curso25.back.repository.EventoRepository;
 import es.cic.curso25.back.repository.TipoEventoRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -28,6 +29,9 @@ import org.junit.jupiter.api.Test;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TipoEventoControllerTest {
+
+    @Autowired
+    EventoRepository eventoRepository;
 
     @Autowired
     TipoEventoRepository tipoEventoRepository;
@@ -47,6 +51,8 @@ public class TipoEventoControllerTest {
 
     @BeforeEach
     void setUp() {
+        eventoRepository.deleteAll(); 
+        tipoEventoRepository.deleteAll();
         tipoEventoRepository.deleteAll();
 
         tipoEvento1 = new TipoEvento();
@@ -64,9 +70,9 @@ public class TipoEventoControllerTest {
 
     @Test
     void testGetAll() throws Exception {
-        
+
         mockMvc.perform(get("/api/tipo_evento"))
-    
+
                 .andExpect(status().isOk())
                 .andExpect(result -> {
                     List<TipoEvento> tipoEventos = objectMapper.readValue(
@@ -75,9 +81,9 @@ public class TipoEventoControllerTest {
                             });
                     assertEquals(3, tipoEventos.size());
                 });
-}
+    }
 
-@Test
+    @Test
     void testCreate() throws Exception {
         TipoEvento nuevoTipoEvento = new TipoEvento();
         nuevoTipoEvento.setNombre("Webinar");
@@ -89,6 +95,5 @@ public class TipoEventoControllerTest {
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.nombre").value("Webinar"));
     }
-
 
 }
