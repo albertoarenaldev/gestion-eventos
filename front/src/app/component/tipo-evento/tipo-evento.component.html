@@ -1,4 +1,12 @@
-<table border="1" style="width: 100%; border-collapse: collapse;">
+<h2>Tipos de Evento</h2>
+
+<!-- Botón para abrir el modal de creación -->
+<div class="mb-3">
+  <button class="btn btn-primary" (click)="abrirModalCreacion()">Crear Nuevo Tipo de Evento</button>
+</div>
+
+<!-- Tabla de Tipos de Evento -->
+<table class="table table-striped">
   <thead>
     <tr>
       <th>ID</th>
@@ -8,6 +16,7 @@
       <th>Duración Máxima</th>
       <th>Aforo Habitual</th>
       <th>Número de Eventos</th>
+      <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -19,6 +28,11 @@
       <td>{{ tipo.duracionMaxima }} min</td>
       <td>{{ tipo.aforoHabitual }}</td>
       <td>{{ tipo.numeroEventos ?? 'N/A' }}</td>
+      <td>
+        <button class="btn btn-danger btn-sm" (click)="eliminarTipoEvento(tipo.id!)" [disabled]="tipo.numeroEventos && tipo.numeroEventos > 0">
+          Eliminar
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>

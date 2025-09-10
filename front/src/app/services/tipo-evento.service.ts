@@ -17,4 +17,12 @@ export class TipoEventoService {
   getTipoEventos(): Observable<TipoEvento[]> {
     return this.http.get<TipoEvento[]>(this.apiUrl);
   }
+
+  createTipoEvento(tipoEvento: TipoEvento): Observable<TipoEvento> {
+    return this.http.post<TipoEvento>(this.apiUrl, tipoEvento);
+  }
+
+    deleteTipoEvento(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }
