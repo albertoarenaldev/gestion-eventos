@@ -47,6 +47,14 @@ public class TipoEventoController {
         return tipoEventoService.create(tipoEvento);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<TipoEvento> getTipoEventoById(@PathVariable Long id) {
+        LOGGER.info("Obteniendo tipo de evento con id: {}", id);
+        return tipoEventoService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PutMapping("/{id}")
     public TipoEvento updateTipoEvento(@PathVariable Long id, @RequestBody TipoEvento tipoEventoDetails) {
         LOGGER.info("Actualizando tipo de evento con id: {}", id);

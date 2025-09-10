@@ -1,6 +1,7 @@
 package es.cic.curso25.back.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,11 @@ public class TipoEventoService {
         return tipoEventoRepository.findByNombreContainingIgnoreCase(nombre);
     }
 
+    @Transactional(readOnly = true)
+    public Optional<TipoEvento> findById(Long id) {
+        LOGGER.info("Buscando tipo de evento con id: {}", id);
+        return tipoEventoRepository.findById(id);
+    }
     public TipoEvento create(TipoEvento tipoEvento) {
 
         LOGGER.info("Creando un nuevo tipo de evento");
