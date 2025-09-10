@@ -21,13 +21,8 @@ export class TipoEventoFormComponent {
     duracionTipica: 0,
     duracionMinima: 0,
     duracionMaxima: 0,
-<<<<<<< HEAD
     aforoHabitual: 0,
     descripcion: ''
-=======
-    aforoHabitual: 0
-    
->>>>>>> feature/frontEvento_TipoEvento
   };
    errorMessage: string | null = null;
     constructor(
