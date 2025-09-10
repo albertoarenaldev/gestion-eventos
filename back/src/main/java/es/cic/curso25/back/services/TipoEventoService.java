@@ -34,6 +34,12 @@ public class TipoEventoService {
         return tipos;
     }
 
+     @Transactional(readOnly = true)
+    public List<TipoEvento> findByNombre(String nombre) {
+        LOGGER.info("Buscando tipos de evento por nombre: {}", nombre);
+        return tipoEventoRepository.findByNombreContainingIgnoreCase(nombre);
+    }
+
     public TipoEvento create(TipoEvento tipoEvento) {
 
         LOGGER.info("Creando un nuevo tipo de evento");
@@ -62,7 +68,7 @@ public class TipoEventoService {
             throw new TipoEventoEmptyNameException("El nombre no puede ser nulo o vacío");
         } else {
             // comprobar que no existe otro tipo de evento con el mismo nombre
-            List<TipoEvento> tipos = tipoEventoRepository.findByNombre(tipoEvento.getNombre());
+            List<TipoEvento> tipos = tipoEventoRepository.findByNombreContainingIgnoreCase(tipoEvento.getNombre());
             if (!tipos.isEmpty()) {
                 throw new IllegalArgumentException("Ya existe un tipo de evento con el nombre: " + tipoEvento.getNombre());
             }

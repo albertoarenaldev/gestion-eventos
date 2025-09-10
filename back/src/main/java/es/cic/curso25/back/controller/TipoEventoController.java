@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-
 
 import es.cic.curso25.back.modelo.TipoEvento;
 import es.cic.curso25.back.services.TipoEventoService;
@@ -36,13 +35,19 @@ public class TipoEventoController {
         return tipoEventoService.findAll();
     }
 
+    @GetMapping(params = "nombre")
+    public List<TipoEvento> getTipoEventosByNombre(@RequestParam String nombre) {
+        LOGGER.info("Obteniendo tipos de evento por nombre: {}", nombre);
+        return tipoEventoService.findByNombre(nombre);
+    }
+
     @PostMapping
     public TipoEvento createTipoEvento(@RequestBody TipoEvento tipoEvento) {
         LOGGER.info("Creando un nuevo tipo de evento");
         return tipoEventoService.create(tipoEvento);
     }
 
-      @PutMapping("/{id}")
+    @PutMapping("/{id}")
     public TipoEvento updateTipoEvento(@PathVariable Long id, @RequestBody TipoEvento tipoEventoDetails) {
         LOGGER.info("Actualizando tipo de evento con id: {}", id);
         TipoEvento updatedTipoEvento = tipoEventoService.update(tipoEventoDetails);
@@ -55,5 +60,3 @@ public class TipoEventoController {
         tipoEventoService.delete(id);
     }
 }
-    
-

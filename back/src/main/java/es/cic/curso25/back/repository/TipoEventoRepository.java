@@ -10,6 +10,6 @@ import es.cic.curso25.back.modelo.TipoEvento;
 
 public interface TipoEventoRepository extends JpaRepository<TipoEvento, Long> {
 
-    List<TipoEvento> findByNombre(String nombre);
+    List<TipoEvento> findByNombreContainingIgnoreCase(String nombre);
     
 }
