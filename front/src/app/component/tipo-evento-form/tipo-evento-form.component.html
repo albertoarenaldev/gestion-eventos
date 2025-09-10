@@ -1,5 +1,5 @@
 <h2>Nuevo Tipo de Evento</h2>
-
+<ngb-alert *ngIf="errorMessage" [type]="'danger'" (closed)="errorMessage = null">{{ errorMessage }}</ngb-alert>
 <form (ngSubmit)="guardar()" #tipoEventoForm="ngForm">
   <div class="mb-3">
     <label for="nombre" class="form-label">Nombre:</label>
