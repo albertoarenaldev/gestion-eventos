@@ -27,8 +27,8 @@ private String descripcion;
 
 private String lugar;
 
-@ManyToOne
-@JoinColumn(name = "tipo_evento_id")
+@ManyToOne(optional = false)
+@JoinColumn(name = "tipo_evento_id", nullable = false)
 @JsonIgnoreProperties("eventos")
 private TipoEvento tipoEvento;
 
