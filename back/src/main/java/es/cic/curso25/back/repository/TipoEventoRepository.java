@@ -7,11 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import es.cic.curso25.back.modelo.TipoEvento;
 
-@Repository
+
 public interface TipoEventoRepository extends JpaRepository<TipoEvento, Long> {
 
     List<TipoEvento> findByNombre(String nombre);
-
-
     
 }
