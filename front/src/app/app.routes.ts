@@ -8,9 +8,10 @@ import { TipoEventoFormComponent } from './component/tipo-evento-form/tipo-event
 export const routes: Routes = [
   { path: 'inicio', component: HomeComponent },
   { path: 'tipo-eventos', component: TipoEventoComponent },
+  { path: 'crear-tipo-evento', component: TipoEventoFormComponent },
+  { path: 'editar-tipo-evento/:id', component: TipoEventoFormComponent },
   { path: 'eventos', component: EventoListComponent },
-   { path: 'crear-tipo-evento', component: TipoEventoFormComponent },
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
   { path: '**', redirectTo: '/inicio' },
- 
+
 ];
