@@ -19,7 +19,8 @@ export class TipoEventoFormComponent {
     duracionTipica: 0,
     duracionMinima: 0,
     duracionMaxima: 0,
-    aforoHabitual: 0
+    aforoHabitual: 0,
+    descripcion: ''
   };
     constructor(
     private tipoEventoService: TipoEventoService,

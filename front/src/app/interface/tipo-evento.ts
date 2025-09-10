@@ -5,6 +5,7 @@ export interface TipoEvento {
     duracionMinima: number;
     duracionMaxima: number;
     aforoHabitual: number;
+    descripcion?: string;
 
 
     //numero de eventos del tipo de evento buscado
