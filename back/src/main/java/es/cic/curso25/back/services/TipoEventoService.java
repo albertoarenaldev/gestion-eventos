@@ -25,7 +25,13 @@ public class TipoEventoService {
     public List<TipoEvento> findAll() {
 
         LOGGER.info("Buscando todos los tipos de eventos");
-        return tipoEventoRepository.findAll();
+        List<TipoEvento> tipos = tipoEventoRepository.findAll();
+        // en esta operación de lectura no escribo en bd, pero sí modifico el objeto
+        // para añadir el número de eventos asociados a cada tipo de evento
+        for (TipoEvento tipo : tipos) {
+            tipo.setNumeroEventos(tipo.getEventos().size());
+        }
+        return tipos;
     }
 
     public TipoEvento create(TipoEvento tipoEvento) {

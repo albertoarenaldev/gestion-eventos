@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 @Entity
 public class TipoEvento {
@@ -27,6 +28,18 @@ private int aforoHabitual;
 
 @OneToMany(mappedBy = "tipoEvento")
 private List<Evento> eventos;
+
+@Transient
+private int numeroEventos;
+
+public int getNumeroEventos() {
+    return numeroEventos;
+}
+
+public void setNumeroEventos(int numeroEventos) {
+    this.numeroEventos = numeroEventos;
+}
+
 
 public Long getId() {
     return id;
