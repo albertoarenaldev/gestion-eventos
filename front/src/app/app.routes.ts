@@ -3,6 +3,7 @@ import { HomeComponent } from './component/home/home.component';
 import { TipoEventoComponent } from './component/tipo-evento/tipo-evento.component';
 import { EventoListComponent } from './component/evento-list/evento-list.component';
 import { TipoEventoFormComponent } from './component/tipo-evento-form/tipo-evento-form.component';
+import { EventoFormComponent } from './component/evento-form/evento-form.component';
 
 
 export const routes: Routes = [
@@ -11,6 +12,8 @@ export const routes: Routes = [
   { path: 'crear-tipo-evento', component: TipoEventoFormComponent },
   { path: 'editar-tipo-evento/:id', component: TipoEventoFormComponent },
   { path: 'eventos', component: EventoListComponent },
+  { path: 'crear-evento', component: EventoFormComponent }, 
+  { path: 'editar-evento/:id', component: EventoFormComponent }, 
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
   { path: '**', redirectTo: '/inicio' },
 

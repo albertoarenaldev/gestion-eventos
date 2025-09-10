@@ -1,1 +1,44 @@
-<p>evento-list works!</p>
+<h2>Listado de Eventos</h2>
+
+<!-- Campo de búsqueda por nombre -->
+<div class="mb-3 d-flex">
+  <input type="text" class="form-control me-2" placeholder="Buscar por nombre..." [(ngModel)]="searchTerm" (keyup.enter)="buscarEventos()">
+  <button class="btn btn-outline-secondary" type="button" (click)="buscarEventos()">Buscar</button>
+  <button class="btn btn-outline-secondary" type="button" (click)="limpiarBusqueda()">Limpiar</button>
+</div>
+
+<div class="mb-3">
+  <button class="btn btn-primary" (click)="crearEvento()">Crear Nuevo Evento</button>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Fecha y Hora</th>
+      <th>Duración (min)</th>
+      <th>Aforo</th>
+      <th>Descripción</th>
+      <th>Lugar</th>
+      <th>Tipo de Evento</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let evento of eventos">
+      <td>{{ evento.id }}</td>
+      <td>{{ evento.nombre }}</td>
+      <td>{{ evento.fechaHora | date: 'medium' }}</td>
+      <td>{{ evento.duracionEspecifica }}</td>
+      <td>{{ evento.aforoEspecifico }}</td>
+      <td>{{ evento.descripcion }}</td>
+      <td>{{ evento.lugar }}</td>
+      <td>{{ evento.tipoEvento.nombre }}</td>
+      <td>
+        <button class="btn btn-info btn-sm" (click)="editarEvento(evento.id!)">Editar</button>
+        <button class="btn btn-danger btn-sm ms-1" (click)="eliminarEvento(evento.id!)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -31,4 +31,12 @@ export class EventoService {
   deleteEvento(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+   searchEventos(nombre: string): Observable<Evento[]> {
+    return this.http.get<Evento[]>(`${this.apiUrl}?nombre=${nombre}`);
+  }
+
+  getEventoById(id: number): Observable<Evento> {
+    return this.http.get<Evento>(`${this.apiUrl}/${id}`);
+  }
 }
