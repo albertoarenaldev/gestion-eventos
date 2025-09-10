@@ -7,19 +7,28 @@
   </div>
   <div class="mb-3">
     <label for="duracionTipica" class="form-label">Duración Típica (min):</label>
-    <input type="number" id="duracionTipica" class="form-control" required [(ngModel)]="nuevoTipoEvento.duracionTipica" name="duracionTipica">
+    <input type="number" id="duracionTipica" class="form-control" required [(ngModel)]="nuevoTipoEvento.duracionTipica"
+      name="duracionTipica">
   </div>
   <div class="mb-3">
     <label for="duracionMinima" class="form-label">Duración Mínima (min):</label>
-    <input type="number" id="duracionMinima" class="form-control" required [(ngModel)]="nuevoTipoEvento.duracionMinima" name="duracionMinima">
+    <input type="number" id="duracionMinima" class="form-control" required [(ngModel)]="nuevoTipoEvento.duracionMinima"
+      name="duracionMinima">
   </div>
   <div class="mb-3">
     <label for="duracionMaxima" class="form-label">Duración Máxima (min):</label>
-    <input type="number" id="duracionMaxima" class="form-control" required [(ngModel)]="nuevoTipoEvento.duracionMaxima" name="duracionMaxima">
+    <input type="number" id="duracionMaxima" class="form-control" required [(ngModel)]="nuevoTipoEvento.duracionMaxima"
+      name="duracionMaxima">
   </div>
   <div class="mb-3">
     <label for="aforoHabitual" class="form-label">Aforo Habitual:</label>
-    <input type="number" id="aforoHabitual" class="form-control" required [(ngModel)]="nuevoTipoEvento.aforoHabitual" name="aforoHabitual">
+    <input type="number" id="aforoHabitual" class="form-control" required [(ngModel)]="nuevoTipoEvento.aforoHabitual"
+      name="aforoHabitual">
+  </div>
+  <div class="mb-3">
+    <label for="descripcion" class="form-label">Descripción:</label>
+    <textarea id="descripcion" class="form-control" [(ngModel)]="nuevoTipoEvento.descripcion" name="descripcion"
+      rows="3"></textarea>
   </div>
 
   <button type="submit" class="btn btn-primary" [disabled]="!tipoEventoForm.form.valid">Guardar</button>

@@ -11,6 +11,7 @@
     <tr>
       <th>ID</th>
       <th>Nombre</th>
+       <th>Descripción</th>
       <th>Duración Típica</th>
       <th>Duración Mínima</th>
       <th>Duración Máxima</th>
@@ -23,6 +24,7 @@
     <tr *ngFor="let tipo of tipoEvento">
       <td>{{ tipo.id }}</td>
       <td>{{ tipo.nombre }}</td>
+       <td>{{ tipo.descripcion }}</td>
       <td>{{ tipo.duracionTipica }} min</td>
       <td>{{ tipo.duracionMinima }} min</td>
       <td>{{ tipo.duracionMaxima }} min</td>

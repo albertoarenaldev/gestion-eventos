@@ -24,6 +24,8 @@ private int duracionTipica;
 private int duracionMinima;
 private int duracionMaxima;
 
+private String descripcion;
+
 private int aforoHabitual;
 
 @OneToMany(mappedBy = "tipoEvento")
@@ -40,6 +42,13 @@ public void setNumeroEventos(int numeroEventos) {
     this.numeroEventos = numeroEventos;
 }
 
+public String getDescripcion() {
+    return descripcion;
+}
+
+public void setDescripcion(String descripcion) {
+    this.descripcion = descripcion;
+}
 
 public Long getId() {
     return id;
