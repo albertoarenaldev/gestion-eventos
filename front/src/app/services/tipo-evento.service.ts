@@ -25,4 +25,20 @@ export class TipoEventoService {
     deleteTipoEvento(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  getTipoEventoById(id: number): Observable<TipoEvento> {
+    return this.http.get<TipoEvento>(`${this.apiUrl}/${id}`);
+  }
+
+  updateTipoEvento(tipoEvento: TipoEvento): Observable<TipoEvento> {
+    return this.http.put<TipoEvento>(`${this.apiUrl}/${tipoEvento.id}`, tipoEvento);
+  }
+
+  create(tipoEvento: TipoEvento): Observable<TipoEvento> {
+    return this.http.post<TipoEvento>(this.apiUrl, tipoEvento);
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

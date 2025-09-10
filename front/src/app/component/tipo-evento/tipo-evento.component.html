@@ -11,7 +11,7 @@
     <tr>
       <th>ID</th>
       <th>Nombre</th>
-       <th>Descripción</th>
+      <th>Descripción</th>
       <th>Duración Típica</th>
       <th>Duración Mínima</th>
       <th>Duración Máxima</th>
@@ -24,15 +24,19 @@
     <tr *ngFor="let tipo of tipoEvento">
       <td>{{ tipo.id }}</td>
       <td>{{ tipo.nombre }}</td>
-       <td>{{ tipo.descripcion }}</td>
+      <td>{{ tipo.descripcion }}</td>
       <td>{{ tipo.duracionTipica }} min</td>
       <td>{{ tipo.duracionMinima }} min</td>
       <td>{{ tipo.duracionMaxima }} min</td>
       <td>{{ tipo.aforoHabitual }}</td>
       <td>{{ tipo.numeroEventos ?? 'N/A' }}</td>
       <td>
-        <button class="btn btn-danger btn-sm" (click)="eliminarTipoEvento(tipo.id!)" [disabled]="tipo.numeroEventos && tipo.numeroEventos > 0">
+        <button class="btn btn-danger btn-sm" (click)="eliminarTipoEvento(tipo.id!)"
+          [disabled]="tipo.numeroEventos && tipo.numeroEventos > 0">
           Eliminar
+        </button>
+        <button class="btn btn-info btn-sm ms-1" (click)="editarTipoEvento(tipo.id!)">
+          Editar
         </button>
       </td>
     </tr>
