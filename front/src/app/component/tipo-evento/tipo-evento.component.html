@@ -1,3 +1,42 @@
+<h2>Tipos de Evento</h2>
+
+<!-- mostrar el formulario -->
+<div *ngIf="!mostrarFormulario">
+  <button (click)="abrirFormulario()">Crear Nuevo Tipo de Evento</button>
+</div>
+
+<!-- formulario de creación -->
+<div *ngIf="mostrarFormulario">
+  <h3>Nuevo Tipo de Evento</h3>
+  <form (ngSubmit)="crearTipoEvento()" #tipoEventoForm="ngForm">
+    <div>
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" required [(ngModel)]="nuevoTipoEvento.nombre" name="nombre">
+    </div>
+    <div>
+      <label for="duracionTipica">Duración Típica (min):</label>
+      <input type="number" id="duracionTipica" required [(ngModel)]="nuevoTipoEvento.duracionTipica" name="duracionTipica">
+    </div>
+    <div>
+      <label for="duracionMinima">Duración Mínima (min):</label>
+      <input type="number" id="duracionMinima" required [(ngModel)]="nuevoTipoEvento.duracionMinima" name="duracionMinima">
+    </div>
+    <div>
+      <label for="duracionMaxima">Duración Máxima (min):</label>
+      <input type="number" id="duracionMaxima" required [(ngModel)]="nuevoTipoEvento.duracionMaxima" name="duracionMaxima">
+    </div>
+    <div>
+      <label for="aforoHabitual">Aforo Habitual:</label>
+      <input type="number" id="aforoHabitual" required [(ngModel)]="nuevoTipoEvento.aforoHabitual" name="aforoHabitual">
+    </div>
+    <button type="submit" [disabled]="!tipoEventoForm.form.valid">Guardar</button>
+    <button type="button" (click)="cancelarCreacion()">Cancelar</button>
+  </form>
+</div>
+
+<hr>
+
+<!-- tabla de tipos de evento -->
 <table border="1" style="width: 100%; border-collapse: collapse;">
   <thead>
     <tr>
@@ -8,6 +47,7 @@
       <th>Duración Máxima</th>
       <th>Aforo Habitual</th>
       <th>Número de Eventos</th>
+      <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -19,6 +59,11 @@
       <td>{{ tipo.duracionMaxima }} min</td>
       <td>{{ tipo.aforoHabitual }}</td>
       <td>{{ tipo.numeroEventos ?? 'N/A' }}</td>
+      <td>
+        <button (click)="eliminarTipoEvento(tipo.id!)" [disabled]="tipo.numeroEventos && tipo.numeroEventos > 0">
+          Eliminar
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
