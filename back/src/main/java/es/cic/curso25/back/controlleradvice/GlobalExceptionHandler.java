@@ -1,21 +1,25 @@
 package es.cic.curso25.back.controlleradvice;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 
-@RestControllerAdvice
+@ControllerAdvice
 public class GlobalExceptionHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
        // excepciones de TipoEvento
     @ExceptionHandler(TipoEventoEmptyNameException.class)
     public ResponseEntity<String> handleTipoEventoEmptyNameException(TipoEventoEmptyNameException e) {
-        LOGGER.warn("Tipo de evento con nombre vacío: {}", e.getMessage());
+        logger.warn("Tipo de evento con nombre vacío: {}", e.getMessage());
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body("Error: " + e.getMessage());
     }
 
    
-}
+}  
