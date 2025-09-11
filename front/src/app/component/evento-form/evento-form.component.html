@@ -50,10 +50,10 @@
             </div>
             <div class="mb-3">
               <label for="aforoEspecifico" class="form-label">Aforo:</label>
-              <input type="number" id="aforoEspecifico" class="form-control" required [(ngModel)]="nuevoEvento.aforoEspecifico" name="aforoEspecifico" #aforo="ngModel" min="0">
+              <input type="number" id="aforoEspecifico" class="form-control" required [(ngModel)]="nuevoEvento.aforoEspecifico" name="aforoEspecifico" #aforo="ngModel" min="1">
               <div *ngIf="aforo.invalid && (aforo.dirty || aforo.touched)" class="text-danger mt-1">
                 <small *ngIf="aforo.errors?.['required']">El aforo es obligatorio.</small>
-                <small *ngIf="aforo.errors?.['min']">El aforo no puede ser negativo.</small>
+                <small *ngIf="aforo.errors?.['min']">El aforo debe ser como mínimo 1.</small>
               </div>
             </div>
             <div class="mb-3">

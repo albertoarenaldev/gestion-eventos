@@ -22,3 +22,11 @@ li a {
 li a:hover {
     background-color: #111;
 }
+
+/* Estilo para el enlace activo */
+li.active a {
+    background-color: #555; /* Un fondo ligeramente diferente */
+    color: #fff; /* Asegurar el color del texto */
+    font-weight: bold;
+    border-radius: 5px; /* Un poco de redondeo */
+}

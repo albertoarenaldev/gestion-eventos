@@ -17,34 +17,34 @@
             </div>
             <div class="mb-3">
               <label for="duracionMinima" class="form-label">Duración Mínima (min):</label>
-              <input type="number" id="duracionMinima" class="form-control" required [(ngModel)]="nuevoTipoEvento.duracionMinima" name="duracionMinima" #duracionMinima="ngModel" min="0">
+              <input type="number" id="duracionMinima" class="form-control" required [(ngModel)]="nuevoTipoEvento.duracionMinima" name="duracionMinima" #duracionMinima="ngModel" min="1">
               <div *ngIf="duracionMinima.invalid && (duracionMinima.dirty || duracionMinima.touched)" class="text-danger mt-1">
                 <small *ngIf="duracionMinima.errors?.['required']">La duración mínima es obligatoria.</small>
-                <small *ngIf="duracionMinima.errors?.['min']">El valor no puede ser negativo.</small>
+                <small *ngIf="duracionMinima.errors?.['min']">El valor debe ser como mínimo 1.</small>
               </div>
             </div>
             <div class="mb-3">
               <label for="duracionTipica" class="form-label">Duración Típica (min):</label>
-              <input type="number" id="duracionTipica" class="form-control" required [(ngModel)]="nuevoTipoEvento.duracionTipica" name="duracionTipica" #duracionTipica="ngModel" min="0">
+              <input type="number" id="duracionTipica" class="form-control" required [(ngModel)]="nuevoTipoEvento.duracionTipica" name="duracionTipica" #duracionTipica="ngModel" min="1">
               <div *ngIf="duracionTipica.invalid && (duracionTipica.dirty || duracionTipica.touched)" class="text-danger mt-1">
                 <small *ngIf="duracionTipica.errors?.['required']">La duración típica es obligatoria.</small>
-                <small *ngIf="duracionTipica.errors?.['min']">El valor no puede ser negativo.</small>
+                <small *ngIf="duracionTipica.errors?.['min']">El valor debe ser como mínimo 1.</small>
               </div>
             </div>
             <div class="mb-3">
               <label for="duracionMaxima" class="form-label">Duración Máxima (min):</label>
-              <input type="number" id="duracionMaxima" class="form-control" required [(ngModel)]="nuevoTipoEvento.duracionMaxima" name="duracionMaxima" #duracionMaxima="ngModel" min="0">
+              <input type="number" id="duracionMaxima" class="form-control" required [(ngModel)]="nuevoTipoEvento.duracionMaxima" name="duracionMaxima" #duracionMaxima="ngModel" min="1">
               <div *ngIf="duracionMaxima.invalid && (duracionMaxima.dirty || duracionMaxima.touched)" class="text-danger mt-1">
                 <small *ngIf="duracionMaxima.errors?.['required']">La duración máxima es obligatoria.</small>
-                <small *ngIf="duracionMaxima.errors?.['min']">El valor no puede ser negativo.</small>
+                <small *ngIf="duracionMaxima.errors?.['min']">El valor debe ser como mínimo 1.</small>
               </div>
             </div>
             <div class="mb-3">
               <label for="aforoHabitual" class="form-label">Aforo Habitual:</label>
-              <input type="number" id="aforoHabitual" class="form-control" required [(ngModel)]="nuevoTipoEvento.aforoHabitual" name="aforoHabitual" #aforoHabitual="ngModel" min="0">
+              <input type="number" id="aforoHabitual" class="form-control" required [(ngModel)]="nuevoTipoEvento.aforoHabitual" name="aforoHabitual" #aforoHabitual="ngModel" min="1">
                <div *ngIf="aforoHabitual.invalid && (aforoHabitual.dirty || aforoHabitual.touched)" class="text-danger mt-1">
                 <small *ngIf="aforoHabitual.errors?.['required']">El aforo es obligatorio.</small>
-                <small *ngIf="aforoHabitual.errors?.['min']">El valor no puede ser negativo.</small>
+                <small *ngIf="aforoHabitual.errors?.['min']">El valor debe ser como mínimo 1.</small>
               </div>
             </div>
             <div class="mb-3">
