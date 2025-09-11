@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.cic.curso25.back.controlleradvice.TipoEventoEmptyNameException;
+import es.cic.curso25.back.controlleradvice.TipoEventoExistenteException;
 import es.cic.curso25.back.modelo.TipoEvento;
 import es.cic.curso25.back.repository.TipoEventoRepository;
 
@@ -74,9 +75,9 @@ public class TipoEventoService {
             throw new TipoEventoEmptyNameException("El nombre no puede ser nulo o vacío");
         } else {
             // comprobar que no existe otro tipo de evento con el mismo nombre
-            List<TipoEvento> tipos = tipoEventoRepository.findByNombreContainingIgnoreCase(tipoEvento.getNombre());
-            if (!tipos.isEmpty()) {
-                throw new IllegalArgumentException("Ya existe un tipo de evento con el nombre: " + tipoEvento.getNombre());
+            TipoEvento tipo = tipoEventoRepository.findByNombreIgnoreCase(tipoEvento.getNombre());
+            if (tipo != null) {
+                throw new TipoEventoExistenteException("Ya existe un tipo de evento con el nombre: " + tipoEvento.getNombre());
             }
         }
     }

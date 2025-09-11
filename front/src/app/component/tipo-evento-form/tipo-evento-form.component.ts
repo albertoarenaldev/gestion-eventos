@@ -61,14 +61,12 @@ export class TipoEventoFormComponent implements OnInit {
         this.router.navigate(['/tipo-eventos']);
       },
       error: (err: HttpErrorResponse) => {
-        // Comprueba la firma específica del error de duplicado que devuelve el backend
-        if (err.status === 500 && err.error?.message?.includes('Ya existe un tipo de evento')) {
-          this.errorMessage = err.error.message; // Muestra el mensaje exacto del backend
+        if (err.status === 409) {
+          this.errorMessage = err.error; 
         } else {
-          // Para cualquier otro error
-          this.errorMessage = 'Ocurrió un error inesperado al crear el tipo de evento.';
+          this.errorMessage = 'Ocurrió un error inesperado al guardar el tipo de evento.';
         }
-        console.error('Error al crear el tipo de evento:', err);
+        console.error('Error al guardar el tipo de evento:', err);
       }
     });
   }

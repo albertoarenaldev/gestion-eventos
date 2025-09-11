@@ -21,5 +21,13 @@ public class GlobalExceptionHandler {
                 .body("Error: " + e.getMessage());
     }
 
+    @ExceptionHandler(TipoEventoExistenteException.class)
+    public ResponseEntity<String> handleTipoEventoExistenteException(TipoEventoExistenteException e) {
+        logger.warn("Intento de crear un tipo de evento que ya existe: {}", e.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(e.getMessage());
+    }
+
    
 }  
