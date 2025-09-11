@@ -57,14 +57,26 @@ public class TipoEventoControllerTest {
 
         tipoEvento1 = new TipoEvento();
         tipoEvento1.setNombre("Conferencia");
+        tipoEvento1.setDuracionMinima(1);
+        tipoEvento1.setDuracionTipica(60);
+        tipoEvento1.setDuracionMaxima(120);
+        tipoEvento1.setAforoHabitual(100);
         tipoEvento1 = tipoEventoRepository.save(tipoEvento1);
 
         tipoEvento2 = new TipoEvento();
         tipoEvento2.setNombre("Taller");
+        tipoEvento2.setDuracionMinima(1);
+        tipoEvento2.setDuracionTipica(120);
+        tipoEvento2.setDuracionMaxima(240);
+        tipoEvento2.setAforoHabitual(50);
         tipoEvento2 = tipoEventoRepository.save(tipoEvento2);
 
         tipoEvento3 = new TipoEvento();
         tipoEvento3.setNombre("Seminario");
+        tipoEvento3.setDuracionMinima(1);
+        tipoEvento3.setDuracionTipica(90);
+        tipoEvento3.setDuracionMaxima(180);
+        tipoEvento3.setAforoHabitual(80);
         tipoEvento3 = tipoEventoRepository.save(tipoEvento3);
     }
 
@@ -87,6 +99,10 @@ public class TipoEventoControllerTest {
     void testCreate() throws Exception {
         TipoEvento nuevoTipoEvento = new TipoEvento();
         nuevoTipoEvento.setNombre("Webinar");
+        nuevoTipoEvento.setDuracionMinima(10);
+        nuevoTipoEvento.setDuracionTipica(60);
+        nuevoTipoEvento.setDuracionMaxima(120);
+        nuevoTipoEvento.setAforoHabitual(50);
 
         mockMvc.perform(post("/api/tipo_evento")
                 .contentType("application/json")
