@@ -50,6 +50,22 @@ public class GlobalExceptionHandler {
                 .body(e.getMessage());
     }
 
+    @ExceptionHandler(DuracionEventoInvalidaException.class)
+    public ResponseEntity<String> handleDuracionEventoInvalidaException(DuracionEventoInvalidaException e) {
+        logger.warn("Error de validación de duración de evento: {}", e.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(e.getMessage());
+    }
+
+    @ExceptionHandler(ConflictoSolapamientoException.class)
+    public ResponseEntity<String> handleConflictoSolapamientoException(ConflictoSolapamientoException e) {
+        logger.warn("Conflicto de solapamiento de evento: {}", e.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(e.getMessage());
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
