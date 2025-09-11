@@ -3,9 +3,11 @@ package es.cic.curso25.back.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +38,12 @@ public class EventoController {
             return eventoService.findById(id);
       }
 
+       @GetMapping(params = "nombre")
+      public List<Evento> getEventosByNombre(@RequestParam String nombre) {
+            LOGGER.info("Obteniendo eventos por nombre: {}", nombre);
+            return eventoService.findByNombre(nombre);
+      }
+
       @GetMapping("/hoy")
       public List<Evento> getEventosDeHoy() {
             LOGGER.info("Obteniendo eventos de hoy");
@@ -49,14 +57,14 @@ public class EventoController {
       }
 
       @PutMapping("/{id}")
-      public Evento updateEvento(@PathVariable Long id, @RequestBody Evento detallesEvento) {
+      public ResponseEntity<Evento> updateEvento(@PathVariable Long id, @RequestBody Evento detallesEvento) {
             LOGGER.info("Actualizando evento con id: {}", id);
             Evento evento = eventoService.findById(id);
             if (evento == null) {
-                  return null;
+                  return ResponseEntity.notFound().build();
             }
             detallesEvento.setId(id);
-            return eventoService.update(detallesEvento);
+            return ResponseEntity.ok(eventoService.update(detallesEvento));
       }
 
       @DeleteMapping("/{id}")

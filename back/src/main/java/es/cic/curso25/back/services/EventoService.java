@@ -32,6 +32,13 @@ public class EventoService {
         return eventoRepository.findById(id).orElse(null);
     }
 
+     @Transactional(readOnly = true)
+    public List<Evento> findByNombre(String nombre) {
+        LOGGER.info("Buscando eventos por nombre: {}", nombre);
+        return eventoRepository.findByNombreContainingIgnoreCase(nombre);
+    }
+    
+
     public Evento create(Evento evento) {
         LOGGER.info("Creando un nuevo evento");
         return eventoRepository.save(evento);
