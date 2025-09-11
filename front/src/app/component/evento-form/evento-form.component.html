@@ -10,33 +10,55 @@
           <form (ngSubmit)="guardar()" #eventoForm="ngForm">
             <div class="mb-3">
               <label for="nombre" class="form-label">Nombre:</label>
-              <input type="text" id="nombre" class="form-control" required [(ngModel)]="nuevoEvento.nombre" name="nombre">
+              <input type="text" id="nombre" class="form-control" required [(ngModel)]="nuevoEvento.nombre" name="nombre" #nombre="ngModel">
+              <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger mt-1">
+                <small *ngIf="nombre.errors?.['required']">El nombre es obligatorio.</small>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="lugar" class="form-label">Lugar:</label>
+              <input type="text" id="lugar" class="form-control" required [(ngModel)]="nuevoEvento.lugar" name="lugar" #lugar="ngModel">
+              <div *ngIf="lugar.invalid && (lugar.dirty || lugar.touched)" class="text-danger mt-1">
+                <small *ngIf="lugar.errors?.['required']">El lugar es obligatorio.</small>
+              </div>
             </div>
             <div class="mb-3">
               <label for="fechaHora" class="form-label">Fecha y Hora:</label>
-              <input type="datetime-local" id="fechaHora" class="form-control" required [(ngModel)]="nuevoEvento.fechaHora" name="fechaHora">
+              <input type="datetime-local" id="fechaHora" class="form-control" required [(ngModel)]="nuevoEvento.fechaHora" name="fechaHora" #fechaHora="ngModel">
+              <div *ngIf="fechaHora.invalid && (fechaHora.dirty || fechaHora.touched)" class="text-danger mt-1">
+                <small *ngIf="fechaHora.errors?.['required']">La fecha y hora son obligatorias.</small>
+              </div>
+            </div>
+             <div class="mb-3">
+              <label for="tipoEvento" class="form-label">Tipo de Evento:</label>
+              <select id="tipoEvento" class="form-select" required [(ngModel)]="nuevoEvento.tipoEvento" name="tipoEvento" (ngModelChange)="onTipoEventoChange()" #tipoEventoModel="ngModel">
+                <option [ngValue]="undefined" disabled>Selecciona un tipo...</option>
+                <option *ngFor="let tipo of tiposEvento" [ngValue]="tipo">{{ tipo.nombre }}</option>
+              </select>
+               <div *ngIf="tipoEventoModel.invalid && (tipoEventoModel.dirty || tipoEventoModel.touched)" class="text-danger mt-1">
+                <small *ngIf="tipoEventoModel.errors?.['required']">Debes seleccionar un tipo de evento.</small>
+              </div>
             </div>
             <div class="mb-3">
               <label for="duracionEspecifica" class="form-label">Duración (min):</label>
-              <input type="number" id="duracionEspecifica" class="form-control" required [(ngModel)]="nuevoEvento.duracionEspecifica" name="duracionEspecifica">
+              <input type="number" id="duracionEspecifica" class="form-control" required [(ngModel)]="nuevoEvento.duracionEspecifica" name="duracionEspecifica" #duracion="ngModel" min="0">
+              <div *ngIf="duracionAyuda" class="form-text">Duración permitida: {{ duracionAyuda.min }} - {{ duracionAyuda.max }} min.</div>
+              <div *ngIf="duracion.invalid && (duracion.dirty || duracion.touched)" class="text-danger mt-1">
+                <small *ngIf="duracion.errors?.['required']">La duración es obligatoria.</small>
+                <small *ngIf="duracion.errors?.['min']">La duración no puede ser negativa.</small>
+              </div>
             </div>
             <div class="mb-3">
               <label for="aforoEspecifico" class="form-label">Aforo:</label>
-              <input type="number" id="aforoEspecifico" class="form-control" required [(ngModel)]="nuevoEvento.aforoEspecifico" name="aforoEspecifico">
+              <input type="number" id="aforoEspecifico" class="form-control" required [(ngModel)]="nuevoEvento.aforoEspecifico" name="aforoEspecifico" #aforo="ngModel" min="0">
+              <div *ngIf="aforo.invalid && (aforo.dirty || aforo.touched)" class="text-danger mt-1">
+                <small *ngIf="aforo.errors?.['required']">El aforo es obligatorio.</small>
+                <small *ngIf="aforo.errors?.['min']">El aforo no puede ser negativo.</small>
+              </div>
             </div>
             <div class="mb-3">
               <label for="descripcion" class="form-label">Descripción:</label>
               <textarea id="descripcion" class="form-control" [(ngModel)]="nuevoEvento.descripcion" name="descripcion" rows="3"></textarea>
-            </div>
-            <div class="mb-3">
-              <label for="lugar" class="form-label">Lugar:</label>
-              <input type="text" id="lugar" class="form-control" required [(ngModel)]="nuevoEvento.lugar" name="lugar">
-            </div>
-            <div class="mb-3">
-              <label for="tipoEvento" class="form-label">Tipo de Evento:</label>
-              <select id="tipoEvento" class="form-select" required [(ngModel)]="nuevoEvento.tipoEvento" name="tipoEvento">
-                <option *ngFor="let tipo of tiposEvento" [ngValue]="tipo">{{ tipo.nombre }}</option>
-              </select>
             </div>
             <div class="d-flex justify-content-end gap-2">
               <button type="submit" class="btn btn-primary" [disabled]="!eventoForm.form.valid">Guardar</button>

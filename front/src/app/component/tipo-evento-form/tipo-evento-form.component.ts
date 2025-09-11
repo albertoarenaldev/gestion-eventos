@@ -61,9 +61,17 @@ export class TipoEventoFormComponent implements OnInit {
         this.router.navigate(['/tipo-eventos']);
       },
       error: (err: HttpErrorResponse) => {
-        if (err.status === 409) {
-          this.errorMessage = err.error; 
+        if (err.status === 409 || err.status === 400) {
+          // Para errores de conflicto (409) o de datos inválidos (400)
+          if (typeof err.error === 'string') {
+            this.errorMessage = err.error;
+          } else {
+            // Si el error es un objeto (de MethodArgumentNotValidException)
+            const errors = Object.values(err.error).join(', ');
+            this.errorMessage = errors;
+          }
         } else {
+          // Para cualquier otro error
           this.errorMessage = 'Ocurrió un error inesperado al guardar el tipo de evento.';
         }
         console.error('Error al guardar el tipo de evento:', err);

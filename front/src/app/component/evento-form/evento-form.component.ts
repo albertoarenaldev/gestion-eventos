@@ -40,6 +40,7 @@ export class EventoFormComponent implements OnInit {
   isEditMode: boolean = false;
   eventoId: number | null = null;
   errorMessage: string | null = null;
+  duracionAyuda: { min: number, max: number } | null = null;
 
   constructor(
     private eventoService: EventoService,
@@ -89,10 +90,37 @@ export class EventoFormComponent implements OnInit {
         this.router.navigate(['/eventos']);
       },
       error: (err: HttpErrorResponse) => {
-        this.errorMessage = 'Ocurrió un error al guardar el evento.';
+        if (err.status === 409 || err.status === 400) {
+          if (typeof err.error === 'string') {
+            this.errorMessage = err.error;
+          } else {
+            const errors = Object.values(err.error).join(', ');
+            this.errorMessage = errors;
+          }
+        } else {
+          this.errorMessage = 'Ocurrió un error inesperado al guardar el evento.';
+        }
         console.error('Error al guardar el evento:', err);
       }
     });
+  }
+
+  onTipoEventoChange(): void {
+    if (this.nuevoEvento.tipoEvento) {
+      const tipoSeleccionado = this.tiposEvento.find(t => t.id === this.nuevoEvento.tipoEvento.id);
+      if (tipoSeleccionado) {
+        this.duracionAyuda = {
+          min: tipoSeleccionado.duracionMinima,
+          max: tipoSeleccionado.duracionMaxima
+        };
+        // Opcional: auto-rellenar la duración específica con la típica
+        if (!this.isEditMode) {
+          this.nuevoEvento.duracionEspecifica = tipoSeleccionado.duracionTipica;
+        }
+      }
+    } else {
+      this.duracionAyuda = null;
+    }
   }
 
   cancelar(): void {
