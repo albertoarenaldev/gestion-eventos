@@ -207,7 +207,7 @@ public class EventoControllerTest {
         mockMvc.perform(put("/api/evento/9999")
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(actualizado)))
-                .andExpect(status().isOk())
+                .andExpect(status().isNotFound())
                 .andExpect(result -> {
                     String response = result.getResponse().getContentAsString();
                     assertTrue(response.isEmpty());
