@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import es.cic.curso25.back.controlleradvice.DuracionIncoherenteException;
 import es.cic.curso25.back.controlleradvice.TipoEventoConEventosException;
 import es.cic.curso25.back.controlleradvice.TipoEventoEmptyNameException;
 import es.cic.curso25.back.controlleradvice.TipoEventoExistenteException;
@@ -53,6 +54,7 @@ public class TipoEventoService {
         LOGGER.info("Creando un nuevo tipo de evento");
 
         comprobacionNombre(tipoEvento);
+        comprobarCoherenciaDuraciones(tipoEvento);
         return tipoEventoRepository.save(tipoEvento);
     }
 
@@ -61,6 +63,7 @@ public class TipoEventoService {
     public TipoEvento update(TipoEvento tipoEvento) {
 
         LOGGER.info("Actualizando el tipo de evento con id: {}", tipoEvento.getId());
+        comprobarCoherenciaDuraciones(tipoEvento);
         return tipoEventoRepository.save(tipoEvento);
     }
 
@@ -88,6 +91,12 @@ public class TipoEventoService {
             if (tipo != null) {
                 throw new TipoEventoExistenteException("Ya existe un tipo de evento con el nombre: " + tipoEvento.getNombre());
             }
+        }
+    }
+
+    private void comprobarCoherenciaDuraciones(TipoEvento tipoEvento) {
+        if (tipoEvento.getDuracionMinima() > tipoEvento.getDuracionTipica() || tipoEvento.getDuracionTipica() > tipoEvento.getDuracionMaxima()) {
+            throw new DuracionIncoherenteException("Las duraciones no son coherentes. Se debe cumplir: Mínima <= Típica <= Máxima.");
         }
     }
 }
