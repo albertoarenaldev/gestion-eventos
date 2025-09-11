@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import es.cic.curso25.back.modelo.Evento;
 import es.cic.curso25.back.services.EventoService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/evento")
@@ -51,13 +52,13 @@ public class EventoController {
       }
 
       @PostMapping
-      public Evento createEvento(@RequestBody Evento evento) {
+      public Evento createEvento(@Valid @RequestBody Evento evento) {
             LOGGER.info("Creando un nuevo evento");
             return eventoService.create(evento);
       }
 
       @PutMapping("/{id}")
-      public ResponseEntity<Evento> updateEvento(@PathVariable Long id, @RequestBody Evento detallesEvento) {
+      public ResponseEntity<Evento> updateEvento(@PathVariable Long id, @Valid @RequestBody Evento detallesEvento) {
             LOGGER.info("Actualizando evento con id: {}", id);
             Evento evento = eventoService.findById(id);
             if (evento == null) {

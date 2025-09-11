@@ -10,6 +10,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 public class Evento {
@@ -18,18 +22,28 @@ public class Evento {
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long id;
 
+@NotEmpty(message = "El nombre no puede estar vacío")
 private String nombre;
+
+@NotNull(message = "La fecha y hora no pueden ser nulas")
+@Future(message = "La fecha del evento debe ser en el futuro")
 private LocalDateTime fechaHora;
+
+@Positive(message = "La duración debe ser un número positivo")
 private int duracionEspecifica;
+
+@Positive(message = "El aforo debe ser un número positivo")
 private int aforoEspecifico;
 
 private String descripcion;
 
+@NotEmpty(message = "El lugar no puede estar vacío")
 private String lugar;
 
 @ManyToOne(optional = false)
 @JoinColumn(name = "tipo_evento_id", nullable = false)
 @JsonIgnoreProperties("eventos")
+@NotNull(message = "El tipo de evento no puede ser nulo")
 private TipoEvento tipoEvento;
 
 public Long getId() {

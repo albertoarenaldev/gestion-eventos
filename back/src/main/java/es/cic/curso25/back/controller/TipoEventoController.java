@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.cic.curso25.back.modelo.TipoEvento;
 import es.cic.curso25.back.services.TipoEventoService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/tipo_evento")
@@ -42,7 +43,7 @@ public class TipoEventoController {
     }
 
     @PostMapping
-    public TipoEvento createTipoEvento(@RequestBody TipoEvento tipoEvento) {
+    public TipoEvento createTipoEvento(@Valid @RequestBody TipoEvento tipoEvento) {
         LOGGER.info("Creando un nuevo tipo de evento");
         return tipoEventoService.create(tipoEvento);
     }
@@ -56,7 +57,7 @@ public class TipoEventoController {
     }
 
     @PutMapping("/{id}")
-    public TipoEvento updateTipoEvento(@PathVariable Long id, @RequestBody TipoEvento tipoEventoDetails) {
+    public TipoEvento updateTipoEvento(@PathVariable Long id, @Valid @RequestBody TipoEvento tipoEventoDetails) {
         LOGGER.info("Actualizando tipo de evento con id: {}", id);
         TipoEvento updatedTipoEvento = tipoEventoService.update(tipoEventoDetails);
         return updatedTipoEvento;

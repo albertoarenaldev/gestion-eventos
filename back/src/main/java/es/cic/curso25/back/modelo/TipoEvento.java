@@ -9,6 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity
 public class TipoEvento {
@@ -18,14 +20,21 @@ public class TipoEvento {
 private Long id;
 
 @Column(nullable = false, unique = true)
+@NotEmpty(message = "El nombre no puede estar vacío")
 private String nombre;
 
+@PositiveOrZero(message = "La duración típica debe ser 0 o mayor")
 private int duracionTipica;
+
+@PositiveOrZero(message = "La duración mínima debe ser 0 o mayor")
 private int duracionMinima;
+
+@PositiveOrZero(message = "La duración máxima debe ser 0 o mayor")
 private int duracionMaxima;
 
 private String descripcion;
 
+@PositiveOrZero(message = "El aforo habitual debe ser 0 o mayor")
 private int aforoHabitual;
 
 @OneToMany(mappedBy = "tipoEvento")
