@@ -6,6 +6,7 @@
           <h2 class="mb-0">Tipos de Evento</h2>
         </div>
         <div class="card-body">
+          <ngb-alert *ngIf="errorMessage" [type]="'danger'" (closed)="errorMessage = null">{{ errorMessage }}</ngb-alert>
           <!-- Botón para abrir el modal de creación -->
           <div class="mb-3">
             <button class="btn btn-success" (click)="abrirModalCreacion()">Crear Tipo Evento</button>

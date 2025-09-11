@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import es.cic.curso25.back.controlleradvice.TipoEventoConEventosException;
 import es.cic.curso25.back.controlleradvice.TipoEventoEmptyNameException;
 import es.cic.curso25.back.controlleradvice.TipoEventoExistenteException;
 import es.cic.curso25.back.modelo.TipoEvento;
@@ -65,8 +66,16 @@ public class TipoEventoService {
 
     public void delete(Long id) {
 
-        LOGGER.info("Eliminando el tipo de evento con id: {}", id);
+        LOGGER.info("Intentando eliminar el tipo de evento con id: {}", id);
+        TipoEvento tipoEvento = tipoEventoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tipo de evento no encontrado con id: " + id));
+
+        if (tipoEvento.getEventos() != null && !tipoEvento.getEventos().isEmpty()) {
+            throw new TipoEventoConEventosException("No se puede eliminar el tipo de evento porque tiene " + tipoEvento.getEventos().size() + " eventos asociados.");
+        }
+
         tipoEventoRepository.deleteById(id);
+        LOGGER.info("Tipo de evento con id: {} eliminado correctamente", id);
     }
 
     private void comprobacionNombre(TipoEvento tipoEvento) {

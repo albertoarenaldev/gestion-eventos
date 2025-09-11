@@ -3,16 +3,19 @@ import { TipoEvento } from '../../interface/tipo-evento';
 import { CommonModule } from '@angular/common';
 import { TipoEventoService } from '../../services/tipo-evento.service';
 import { Router } from '@angular/router';
+import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-tipo-evento',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgbAlertModule],
   templateUrl: './tipo-evento.component.html',
   styleUrl: './tipo-evento.component.css'
 })
 export class TipoEventoComponent implements OnInit {
   tipoEvento: TipoEvento[] = [];
+  errorMessage: string | null = null;
 
   constructor(
     private tipoEventoService: TipoEventoService,
@@ -25,6 +28,7 @@ export class TipoEventoComponent implements OnInit {
   }
 
   cargarTiposEvento(): void {
+    this.errorMessage = null;
     this.tipoEventoService.getTipoEventos().subscribe((data: TipoEvento[]) => {
       this.tipoEvento = data;
     });
@@ -36,16 +40,17 @@ export class TipoEventoComponent implements OnInit {
   }
 
   eliminarTipoEvento(id: number): void {
+    this.errorMessage = null;
     if (confirm('¿Estás seguro de que quieres eliminar este tipo de evento?')) {
       this.tipoEventoService.deleteTipoEvento(id).subscribe({
         next: () => {
           this.cargarTiposEvento();
         },
-        error: (err) => {
+        error: (err: HttpErrorResponse) => {
           if (err.status === 409) {
-            alert('Error: No se puede eliminar el tipo de evento porque está en uso.');
+            this.errorMessage = err.error;
           } else {
-            alert('Ocurrió un error inesperado al intentar eliminar.');
+            this.errorMessage = 'Ocurrió un error inesperado al intentar eliminar.';
           }
         }
       });

@@ -29,5 +29,13 @@ public class GlobalExceptionHandler {
                 .body(e.getMessage());
     }
 
+    @ExceptionHandler(TipoEventoConEventosException.class)
+    public ResponseEntity<String> handleTipoEventoConEventosException(TipoEventoConEventosException e) {
+        logger.warn("Intento de eliminar un tipo de evento con eventos asociados: {}", e.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(e.getMessage());
+    }
+
    
 }  
