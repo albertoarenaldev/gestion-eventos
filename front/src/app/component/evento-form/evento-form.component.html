@@ -1,45 +1,50 @@
-<h2>{{ isEditMode ? 'Editar Evento' : 'Crear Nuevo Evento' }}</h2>
-
-<ngb-alert *ngIf="errorMessage" [type]="'danger'" (closed)="errorMessage = null">{{ errorMessage }}</ngb-alert>
-
-<form (ngSubmit)="guardar()" #eventoForm="ngForm">
-  <div class="mb-3">
-    <label for="nombre" class="form-label">Nombre:</label>
-    <input type="text" id="nombre" class="form-control" required [(ngModel)]="nuevoEvento.nombre" name="nombre">
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h2 class="mb-0">{{ isEditMode ? 'Editar Evento' : 'Crear Evento' }}</h2>
+        </div>
+        <div class="card-body">
+          <ngb-alert *ngIf="errorMessage" [type]="'danger'" (closed)="errorMessage = null">{{ errorMessage }}</ngb-alert>
+          <form (ngSubmit)="guardar()" #eventoForm="ngForm">
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre:</label>
+              <input type="text" id="nombre" class="form-control" required [(ngModel)]="nuevoEvento.nombre" name="nombre">
+            </div>
+            <div class="mb-3">
+              <label for="fechaHora" class="form-label">Fecha y Hora:</label>
+              <input type="datetime-local" id="fechaHora" class="form-control" required [(ngModel)]="nuevoEvento.fechaHora" name="fechaHora">
+            </div>
+            <div class="mb-3">
+              <label for="duracionEspecifica" class="form-label">Duración (min):</label>
+              <input type="number" id="duracionEspecifica" class="form-control" required [(ngModel)]="nuevoEvento.duracionEspecifica" name="duracionEspecifica">
+            </div>
+            <div class="mb-3">
+              <label for="aforoEspecifico" class="form-label">Aforo:</label>
+              <input type="number" id="aforoEspecifico" class="form-control" required [(ngModel)]="nuevoEvento.aforoEspecifico" name="aforoEspecifico">
+            </div>
+            <div class="mb-3">
+              <label for="descripcion" class="form-label">Descripción:</label>
+              <textarea id="descripcion" class="form-control" [(ngModel)]="nuevoEvento.descripcion" name="descripcion" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="lugar" class="form-label">Lugar:</label>
+              <input type="text" id="lugar" class="form-control" required [(ngModel)]="nuevoEvento.lugar" name="lugar">
+            </div>
+            <div class="mb-3">
+              <label for="tipoEvento" class="form-label">Tipo de Evento:</label>
+              <select id="tipoEvento" class="form-select" required [(ngModel)]="nuevoEvento.tipoEvento" name="tipoEvento">
+                <option *ngFor="let tipo of tiposEvento" [ngValue]="tipo">{{ tipo.nombre }}</option>
+              </select>
+            </div>
+            <div class="d-flex justify-content-end gap-2">
+              <button type="submit" class="btn btn-primary" [disabled]="!eventoForm.form.valid">Guardar</button>
+              <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="mb-3">
-    <label for="fechaHora" class="form-label">Fecha y Hora:</label>
-    <input type="datetime-local" id="fechaHora" class="form-control" required [(ngModel)]="nuevoEvento.fechaHora" name="fechaHora">
-  </div>
-
-  <div class="mb-3">
-    <label for="duracionEspecifica" class="form-label">Duración (min):</label>
-    <input type="number" id="duracionEspecifica" class="form-control" required [(ngModel)]="nuevoEvento.duracionEspecifica" name="duracionEspecifica">
-  </div>
-
-  <div class="mb-3">
-    <label for="aforoEspecifico" class="form-label">Aforo:</label>
-    <input type="number" id="aforoEspecifico" class="form-control" required [(ngModel)]="nuevoEvento.aforoEspecifico" name="aforoEspecifico">
-  </div>
-
-  <div class="mb-3">
-    <label for="descripcion" class="form-label">Descripción:</label>
-    <textarea id="descripcion" class="form-control" [(ngModel)]="nuevoEvento.descripcion" name="descripcion" rows="3"></textarea>
-  </div>
-
-  <div class="mb-3">
-    <label for="lugar" class="form-label">Lugar:</label>
-    <input type="text" id="lugar" class="form-control" required [(ngModel)]="nuevoEvento.lugar" name="lugar">
-  </div>
-
-  <div class="mb-3">
-    <label for="tipoEvento" class="form-label">Tipo de Evento:</label>
-    <select id="tipoEvento" class="form-select" required [(ngModel)]="nuevoEvento.tipoEvento" name="tipoEvento">
-      <option *ngFor="let tipo of tiposEvento" [ngValue]="tipo">{{ tipo.nombre }}</option>
-    </select>
-  </div>
-
-  <button type="submit" class="btn btn-primary" [disabled]="!eventoForm.form.valid">Guardar</button>
-  <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
-</form>
+</div>

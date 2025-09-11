@@ -1,36 +1,44 @@
-<h2>Nuevo Tipo de Evento</h2>
-<ngb-alert *ngIf="errorMessage" [type]="'danger'" (closed)="errorMessage = null">{{ errorMessage }}</ngb-alert>
-<form (ngSubmit)="guardar()" #tipoEventoForm="ngForm">
-  <div class="mb-3">
-    <label for="nombre" class="form-label">Nombre:</label>
-    <input type="text" id="nombre" class="form-control" required [(ngModel)]="nuevoTipoEvento.nombre" name="nombre">
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h2 class="mb-0">{{ isEditMode ? 'Editar Tipo de Evento' : 'Crear Tipo de Evento' }}</h2>
+        </div>
+        <div class="card-body">
+          <ngb-alert *ngIf="errorMessage" [type]="'danger'" (closed)="errorMessage = null">{{ errorMessage }}</ngb-alert>
+          <form (ngSubmit)="guardar()" #tipoEventoForm="ngForm">
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre:</label>
+              <input type="text" id="nombre" class="form-control" required [(ngModel)]="nuevoTipoEvento.nombre" name="nombre">
+            </div>
+            <div class="mb-3">
+              <label for="duracionTipica" class="form-label">Duración Típica (min):</label>
+              <input type="number" id="duracionTipica" class="form-control" required [(ngModel)]="nuevoTipoEvento.duracionTipica" name="duracionTipica">
+            </div>
+            <div class="mb-3">
+              <label for="duracionMinima" class="form-label">Duración Mínima (min):</label>
+              <input type="number" id="duracionMinima" class="form-control" required [(ngModel)]="nuevoTipoEvento.duracionMinima" name="duracionMinima">
+            </div>
+            <div class="mb-3">
+              <label for="duracionMaxima" class="form-label">Duración Máxima (min):</label>
+              <input type="number" id="duracionMaxima" class="form-control" required [(ngModel)]="nuevoTipoEvento.duracionMaxima" name="duracionMaxima">
+            </div>
+            <div class="mb-3">
+              <label for="aforoHabitual" class="form-label">Aforo Habitual:</label>
+              <input type="number" id="aforoHabitual" class="form-control" required [(ngModel)]="nuevoTipoEvento.aforoHabitual" name="aforoHabitual">
+            </div>
+            <div class="mb-3">
+              <label for="descripcion" class="form-label">Descripción:</label>
+              <textarea id="descripcion" class="form-control" [(ngModel)]="nuevoTipoEvento.descripcion" name="descripcion" rows="3"></textarea>
+            </div>
+            <div class="d-flex justify-content-end gap-2">
+              <button type="submit" class="btn btn-primary" [disabled]="!tipoEventoForm.form.valid">Guardar</button>
+              <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="mb-3">
-    <label for="duracionTipica" class="form-label">Duración Típica (min):</label>
-    <input type="number" id="duracionTipica" class="form-control" required [(ngModel)]="nuevoTipoEvento.duracionTipica"
-      name="duracionTipica">
-  </div>
-  <div class="mb-3">
-    <label for="duracionMinima" class="form-label">Duración Mínima (min):</label>
-    <input type="number" id="duracionMinima" class="form-control" required [(ngModel)]="nuevoTipoEvento.duracionMinima"
-      name="duracionMinima">
-  </div>
-  <div class="mb-3">
-    <label for="duracionMaxima" class="form-label">Duración Máxima (min):</label>
-    <input type="number" id="duracionMaxima" class="form-control" required [(ngModel)]="nuevoTipoEvento.duracionMaxima"
-      name="duracionMaxima">
-  </div>
-  <div class="mb-3">
-    <label for="aforoHabitual" class="form-label">Aforo Habitual:</label>
-    <input type="number" id="aforoHabitual" class="form-control" required [(ngModel)]="nuevoTipoEvento.aforoHabitual"
-      name="aforoHabitual">
-  </div>
-  <div class="mb-3">
-    <label for="descripcion" class="form-label">Descripción:</label>
-    <textarea id="descripcion" class="form-control" [(ngModel)]="nuevoTipoEvento.descripcion" name="descripcion"
-      rows="3"></textarea>
-  </div>
-
-  <button type="submit" class="btn btn-primary" [disabled]="!tipoEventoForm.form.valid">Guardar</button>
-  <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
-</form>
+</div>

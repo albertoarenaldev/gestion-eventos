@@ -1,29 +1,42 @@
-<div>
-  <h2>Eventos para Hoy</h2>
-  <div *ngIf="eventosDeHoy.length === 0; else tablaEventos">
-    <p>No hay eventos programados para hoy.</p>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h2 class="mb-0">Eventos para Hoy</h2>
+        </div>
+        <div class="card-body">
+          <div *ngIf="eventosDeHoy.length === 0; else tablaEventos">
+            <div class="alert alert-info" role="alert">
+              No hay eventos programados para hoy.
+            </div>
+          </div>
+          <ng-template #tablaEventos>
+            <div class="table-responsive">
+              <table class="table table-striped align-middle">
+                <thead class="table-primary">
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Hora</th>
+                    <th>Lugar</th>
+                    <th>Tipo de Evento</th>
+                    <th>Descripción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let evento of eventosDeHoy">
+                    <td>{{ evento.nombre }}</td>
+                    <td>{{ evento.fechaHora | date: 'HH:mm' }}</td>
+                    <td>{{ evento.lugar }}</td>
+                    <td>{{ evento.tipoEvento.nombre }}</td>
+                    <td>{{ evento.descripcion }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <ng-template #tablaEventos>
-    <table border="1" style="width: 100%; border-collapse: collapse;">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Hora</th>
-          <th>Lugar</th>
-          <th>Tipo de Evento</th>
-          <th>Descripción</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let evento of eventosDeHoy">
-          <td>{{ evento.nombre }}</td>
-          <td>{{ evento.fechaHora | date: 'HH:mm' }}</td>
-          <td>{{ evento.lugar }}</td>
-          <td>{{ evento.tipoEvento.nombre }}</td>
-          <td>{{ evento.descripcion }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </ng-template>
 </div>
