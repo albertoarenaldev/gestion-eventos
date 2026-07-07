@@ -1,0 +1,38 @@
+# IDE
+.idea/
+.vscode/
+*.code-workspace
+*.iml
+.project
+.classpath
+.settings/
+
+# Backend (Maven / Java)
+back/target/
+*.jar
+*.war
+*.class
+hs_err_pid*
+replay_pid*
+
+# Frontend (Angular / Node)
+front/node_modules/
+front/dist/
+front/.angular/
+front/coverage/
+front/npm-debug.log*
+front/yarn-debug.log*
+front/yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Misc
+*.log
+.env
+.env.local
+.env.*.local

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,9 @@ public class EventoService {
     }
 
     @Transactional(readOnly = true)
-    public Evento findById(Long id) {
+    public Optional<Evento> findById(Long id) {
         LOGGER.info("Buscando evento con id: {}", id);
-        return eventoRepository.findById(id).orElse(null);
+        return eventoRepository.findById(id);
     }
 
      @Transactional(readOnly = true)

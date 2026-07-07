@@ -1,0 +1,13 @@
+.git
+.gitignore
+back/target
+back/.idea
+back/.vscode
+front/node_modules
+front/dist
+front/.angular
+.vscode
+.idea
+*.log
+.env
+.env.*

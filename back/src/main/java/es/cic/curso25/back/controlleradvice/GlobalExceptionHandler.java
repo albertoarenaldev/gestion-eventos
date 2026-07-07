@@ -26,6 +26,14 @@ public class GlobalExceptionHandler {
                 .body("Error: " + e.getMessage());
     }
 
+    @ExceptionHandler(TipoEventoNotFoundException.class)
+    public ResponseEntity<String> handleTipoEventoNotFoundException(TipoEventoNotFoundException e) {
+        logger.warn("Tipo de evento no encontrado: {}", e.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(e.getMessage());
+    }
+
     @ExceptionHandler(TipoEventoExistenteException.class)
     public ResponseEntity<String> handleTipoEventoExistenteException(TipoEventoExistenteException e) {
         logger.warn("Intento de crear un tipo de evento que ya existe: {}", e.getMessage());
@@ -70,10 +78,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(error -> 
+        ex.getBindingResult().getFieldErrors().forEach(error ->
             errors.put(error.getField(), error.getDefaultMessage()));
         return errors;
     }
 
-   
-}  
+
+}

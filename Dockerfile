@@ -20,8 +20,8 @@ RUN mvn clean package
 FROM eclipse-temurin:17.0.16_8-jre-alpine
 
 # Metadatos de la imagen
-LABEL maintainer="tu-email@ejemplo.com"
-LABEL description="Aplicación Spring Boot - Proyecto Arbol"
+LABEL maintainer="Alberto Arenal <alberto.arenal.dev@gmail.com>"
+LABEL description="Gestión de Eventos — Spring Boot + Angular"
 LABEL version="1.0"
 
 # Crear usuario no-root para seguridad

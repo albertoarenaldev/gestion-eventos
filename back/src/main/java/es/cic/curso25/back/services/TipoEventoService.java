@@ -13,6 +13,7 @@ import es.cic.curso25.back.controlleradvice.DuracionIncoherenteException;
 import es.cic.curso25.back.controlleradvice.TipoEventoConEventosException;
 import es.cic.curso25.back.controlleradvice.TipoEventoEmptyNameException;
 import es.cic.curso25.back.controlleradvice.TipoEventoExistenteException;
+import es.cic.curso25.back.controlleradvice.TipoEventoNotFoundException;
 import es.cic.curso25.back.modelo.TipoEvento;
 import es.cic.curso25.back.repository.TipoEventoRepository;
 
@@ -25,7 +26,10 @@ public class TipoEventoService {
     @Autowired
     private TipoEventoRepository tipoEventoRepository;
 
-    @Transactional(readOnly = true)
+    // Note: not @Transactional(readOnly = true) on purpose — this method mutates
+    // managed entities (sets numeroEventos), so Hibernate's dirty checking would
+    // conflict with a read-only transaction.
+    @Transactional
     public List<TipoEvento> findAll() {
 
         LOGGER.info("Buscando todos los tipos de eventos");
@@ -71,7 +75,7 @@ public class TipoEventoService {
 
         LOGGER.info("Intentando eliminar el tipo de evento con id: {}", id);
         TipoEvento tipoEvento = tipoEventoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Tipo de evento no encontrado con id: " + id));
+                .orElseThrow(() -> new TipoEventoNotFoundException("Tipo de evento no encontrado con id: " + id));
 
         if (tipoEvento.getEventos() != null && !tipoEvento.getEventos().isEmpty()) {
             throw new TipoEventoConEventosException("No se puede eliminar el tipo de evento porque tiene " + tipoEvento.getEventos().size() + " eventos asociados.");

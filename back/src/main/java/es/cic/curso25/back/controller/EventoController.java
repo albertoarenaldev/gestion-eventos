@@ -34,9 +34,11 @@ public class EventoController {
       }
 
       @GetMapping("/{id}")
-      public Evento getEventoById(@PathVariable Long id) {
+      public ResponseEntity<Evento> getEventoById(@PathVariable Long id) {
             LOGGER.info("Obteniendo evento con id: {}", id);
-            return eventoService.findById(id);
+            return eventoService.findById(id)
+                    .map(ResponseEntity::ok)
+                    .orElse(ResponseEntity.notFound().build());
       }
 
        @GetMapping(params = "nombre")
@@ -60,8 +62,7 @@ public class EventoController {
       @PutMapping("/{id}")
       public ResponseEntity<Evento> updateEvento(@PathVariable Long id, @Valid @RequestBody Evento detallesEvento) {
             LOGGER.info("Actualizando evento con id: {}", id);
-            Evento evento = eventoService.findById(id);
-            if (evento == null) {
+            if (eventoService.findById(id).isEmpty()) {
                   return ResponseEntity.notFound().build();
             }
             detallesEvento.setId(id);
@@ -71,8 +72,7 @@ public class EventoController {
       @DeleteMapping("/{id}")
       public void deleteEvento(@PathVariable Long id) {
             LOGGER.info("Eliminando evento con id: {}", id);
-            Evento evento = eventoService.findById(id);
-            if (evento == null) {
+            if (eventoService.findById(id).isEmpty()) {
                   return;
             }
             eventoService.delete(id);
