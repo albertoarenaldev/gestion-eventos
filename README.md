@@ -9,6 +9,17 @@
 > Proyecto final del Bootcamp Java · CIC Consulting Informático Cantabria (jul–sep 2025).
 > Aplicación fullstack para la gestión de eventos y sus tipos, con API REST en Spring Boot y frontend en Angular.
 
+## TL;DR
+
+- ✅ **API REST completa** — CRUD para eventos y tipos de evento (Spring Boot 3 + JPA)
+- ✅ **9/9 tests pasando** — JUnit 5 + Mockito (Spring Boot Test starter)
+- ✅ **7 excepciones custom** — mapeadas a HTTP 400/404/409 con `@ControllerAdvice`
+- ✅ **Arquitectura MVC** — Controller → Service → Repository → DB
+- ✅ **Docker multi-stage** — Maven builder + JRE Alpine, usuario no-root, healthcheck
+- ✅ **CI/CD con Jenkins + SonarQube + JaCoCo** — pipeline de 5 stages con cobertura
+- ✅ **CORS configurable** — vía variable de entorno `APP_CORS_ORIGINS`
+- ✅ **Frontend Angular 18** — con proxy dev a `/api/*`
+
 ---
 
 ## Tabla de contenidos
@@ -334,3 +345,18 @@ Ese documento conserva la prosa completa del análisis original en `resumen.txt`
 ## Licencia
 
 Este proyecto está bajo la **Apache License 2.0** — ver el archivo [LICENSE](LICENSE) para más detalles.
+
+
+---
+
+<div align="center">
+
+🌐 [Portfolio](https://albertoarenaldev.github.io/dev-portfolio/) ·
+📫 [Email](mailto:alberto.arenal.dev@gmail.com) ·
+💼 [LinkedIn](https://www.linkedin.com/in/alberto-arenal-fernandez)
+
+<sub>Hecho con ☕ y Spring Boot en Cantabria, España</sub>
+
+![Profile views](https://komarev.com/ghpvc/?username=albertoarenaldev&color=blueviolet&style=flat)
+
+</div>
