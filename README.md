@@ -140,6 +140,50 @@ Las validaciones de negocio viven en los servicios y lanzan **excepciones custom
 | `ConflictoSolapamientoException` | 409 | solapamiento de horario en el mismo lugar |
 | `MethodArgumentNotValidException` | 400 | errores de Bean Validation |
 
+### Diagrama de arquitectura
+
+```mermaid
+graph TB
+    subgraph Frontend["🖥️ Angular 18 + TypeScript"]
+        FE_List["📋 Evento List<br/>CRUD + búsqueda"]
+        FE_Form["✏️ Evento Form<br/>Crear / Editar"]
+        FE_Tipo["🏷️ Tipo Evento<br/>Gestión de tipos"]
+    end
+
+    subgraph Backend["☕ Spring Boot 3 API REST"]
+        Controller["🌐 REST Controllers<br/>EventoController<br/>TipoEventoController"]
+        Service["⚙️ Service Layer<br/>Lógica de negocio<br/>Validaciones"]
+        Repo["💾 JPA Repositories<br/>Spring Data JPA<br/>Hibernate"]
+    end
+
+    subgraph DB["🗄️ Persistencia"]
+        H2_Dev[("H2<br/>Desarrollo")]
+        PG_Prod[("PostgreSQL<br/>Producción")]
+    end
+
+    subgraph DevOps["⚙️ CI/CD Pipeline"]
+        Jenkins["Jenkins<br/>Pipeline"]
+        Sonar["SonarQube<br/>Análisis"]
+        JaCoCo["JaCoCo<br/>Cobertura"]
+        Docker["Docker<br/>Multi-stage"]
+    end
+
+    FE_List -->|"HTTP REST"| Controller
+    FE_Form -->|"HTTP REST"| Controller
+    FE_Tipo -->|"HTTP REST"| Controller
+    Controller --> Service
+    Service --> Repo
+    Repo --> H2_Dev
+    Repo --> PG_Prod
+
+    Jenkins -.->|"build + test"| Backend
+    Jenkins -.->|"build"| Frontend
+    Sonar -.-> Backend
+    JaCoCo -.-> Backend
+    Docker -.-> Backend
+    Docker -.-> Frontend
+```
+
 ### CORS
 
 `CorsConfig` permite por defecto los orígenes de desarrollo (`http://localhost:4200` para Angular CLI, `http://localhost:5173` para Vite) y se amplía en producción con la variable de entorno `APP_CORS_ORIGINS` (CSV):
