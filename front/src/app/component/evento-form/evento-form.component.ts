@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { EventoService } from '../../services/evento.service';
 import { Evento } from '../../interface/evento';
 import { TipoEventoService } from '../../services/tipo-evento.service';
@@ -51,11 +51,11 @@ export class EventoFormComponent implements OnInit {
 
   ngOnInit(): void {
     // carga de todos los tipos de evento 
-    this.tipoEventoService.getTipoEventos().subscribe(tipos => {
+    this.tipoEventoService.getTipoEventos().subscribe((tipos: TipoEvento[]) => {
       this.tiposEvento = tipos;
 
       // suscribirse a los parámetros de la ruta para cargar el evento si está en modo edición
-      this.route.paramMap.subscribe(params => {
+      this.route.paramMap.subscribe((params: ParamMap) => {
         const id = params.get('id');
         if (id) {
           this.isEditMode = true;

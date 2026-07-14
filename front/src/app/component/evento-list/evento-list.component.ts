@@ -4,6 +4,7 @@ import { Evento } from '../../interface/evento';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-evento-list',
@@ -25,11 +26,11 @@ export class EventoListComponent implements OnInit {
 
   cargarEventos(nombre?: string): void {
     if (nombre) {
-      this.eventoService.searchEventos(nombre).subscribe(data => {
+      this.eventoService.searchEventos(nombre).subscribe((data: Evento[]) => {
         this.eventos = data;
       });
     } else {
-      this.eventoService.getEventos().subscribe(data => {
+      this.eventoService.getEventos().subscribe((data: Evento[]) => {
         this.eventos = data;
       });
     }
@@ -58,7 +59,7 @@ export class EventoListComponent implements OnInit {
         next: () => {
           this.cargarEventos();
         },
-        error: (err) => {
+        error: (err: HttpErrorResponse) => {
           if (err.status === 409) {
             alert('Error: No se puede eliminar el evento porque está en uso.');
           } else {

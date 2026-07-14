@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   constructor(private eventoService: EventoService) { }
 
   ngOnInit(): void {
-    this.eventoService.getEventosDeHoy().subscribe(data => {
+    this.eventoService.getEventosDeHoy().subscribe((data: Evento[]) => {
       this.eventosDeHoy = data;
     });
   }
